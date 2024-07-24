@@ -7,14 +7,12 @@ services:
     ports:
       - "27017:27017"
     healthcheck:
-      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'host.docker.internal:27017',priority:1}]}) }" | mongosh --port 27017 --quiet
+      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'localhost:27017',priority:1}]}) }" | mongosh --port 27017 --quiet
       interval: 5s
       timeout: 30s
       start_period: 0s
       start_interval: 1s
       retries: 5
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
 
   redis_store:
     image: redis
